@@ -29,6 +29,7 @@ public class Config {
     public static final String KEY_USUARIO_NOME = "nome";
     public static final String KEY_USUARIO_EMAIL = "email";
     public static final String KEY_USUARIO_SENHA = "senha";
+    //teste comitt
     public static final String KEY_USUARIO_CIDADE = "cidade";
     public static final String KEY_USUARIO_ESTADO  = "estado";
     public static final String KEY_USUARIO_IDLOGADO  = "idLogado";
