@@ -317,4 +317,44 @@ public class PerfilAutonomo extends AppCompatActivity {
         listView.setAdapter(adapterListView);
         listView.setCacheColorHint(Color.TRANSPARENT);
     }
+
+    public void deletaItem(View v) {
+        adapterListView.removeItem((Integer) v.getTag());
+        String idMensagem= adapterListView.idSelecionado;
+        deletarMensagem(idMensagem);
+    }
+
+    private void deletarMensagem(final String idMens){
+        class DeletarMensagem extends AsyncTask<Void,Void,String> {
+            ProgressDialog loading;
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                loading = ProgressDialog.show(PerfilAutonomo.this, "Deletando Mensagem", "Aguarde...", false, false);
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                loading.dismiss();
+                Intent intent = new Intent(PerfilAutonomo.this, PerfilAutonomo.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("id", id);
+                intent.putExtras(bundle);
+                startActivity(intent);
+                finish();
+            }
+
+            @Override
+            protected String doInBackground(Void... params) {
+                AcessoWeb rh = new AcessoWeb();
+                String s = rh.sendGetRequestParam(Config.URL_DELETAR_MENSAGEM, idMens);
+                return s;
+            }
+        }
+
+        DeletarMensagem de = new DeletarMensagem();
+        de.execute();
+    }
 }

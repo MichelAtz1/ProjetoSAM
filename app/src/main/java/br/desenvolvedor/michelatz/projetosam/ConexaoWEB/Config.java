@@ -23,6 +23,7 @@ public class Config {
     public static final String URL_LISTA_AUTONOMOS = "http://projetosw.esy.es/conexao/listaAutonomos.php";
     public static final String URL_INSERIR_MENSAGEM = "http://projetosw.esy.es/conexao/addMensagens.php";
     public static final String URL_BUSCA_MENSAGENS = "http://projetosw.esy.es/conexao/buscaMensagens.php?idServico=";
+    public static final String URL_DELETAR_MENSAGEM = "http://projetosw.esy.es/conexao/excluirMensagem.php?id=";
 
 
     //Chaves que seram usadas nos scripts PHPs
