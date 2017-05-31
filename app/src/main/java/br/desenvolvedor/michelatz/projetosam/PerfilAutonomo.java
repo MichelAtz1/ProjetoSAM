@@ -46,7 +46,6 @@ public class PerfilAutonomo extends AppCompatActivity {
     private ListView listView;
     private AdapterListView adapterListView;
     private ArrayList<Mensagem> itens;
-    private ImageView imgFotoDenuncia;
     public static String idUsuarioGlobal = "Isso é uma global";
 
     @Override
@@ -106,7 +105,7 @@ public class PerfilAutonomo extends AppCompatActivity {
         });
         mToobarBotton.inflateMenu(R.menu.menu_botton_usuario);
 
-        getJSON();
+        buscaMensagens();
         listView = (ListView) findViewById(R.id.listViewMensagens);
     }
 
@@ -235,8 +234,8 @@ public class PerfilAutonomo extends AppCompatActivity {
                 hashMap.put(Config.KEY_SERVICO_MENSAGEM,comentario);
                 hashMap.put(Config.KEY_SERVICO_IDSERVICO,id);
 
-                AcessoWeb rh = new AcessoWeb();
-                String s = rh.sendPostRequest(Config.URL_INSERIR_MENSAGEM,hashMap);
+                AcessoWeb acesso = new AcessoWeb();
+                String s = acesso.sendPostRequest(Config.URL_INSERIR_MENSAGEM,hashMap);
 
                 return s;
             }
@@ -246,8 +245,8 @@ public class PerfilAutonomo extends AppCompatActivity {
         ue.execute();
     }
 
-    private void getJSON(){
-        class GetJSON extends AsyncTask<Void,Void,String> {
+    private void buscaMensagens(){
+        class buscaMensagens extends AsyncTask<Void,Void,String> {
 
             ProgressDialog loading;
             @Override
@@ -260,7 +259,7 @@ public class PerfilAutonomo extends AppCompatActivity {
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
                 loading.dismiss();
-                showEmployee();
+                mostraListaMensagens();
             }
 
             @Override
@@ -269,17 +268,17 @@ public class PerfilAutonomo extends AppCompatActivity {
                 SharedPreferences sharedpreferences = getSharedPreferences(Login.MyPREFERENCES, Context.MODE_PRIVATE);
                 String idUser = sharedpreferences.getString("idKey", null);
                 idUsuarioGlobal = idUser;
-                AcessoWeb rh = new AcessoWeb();
-                String s = rh.sendGetRequestParam(Config.URL_BUSCA_MENSAGENS,id);
+                AcessoWeb acesso = new AcessoWeb();
+                String s = acesso.sendGetRequestParam(Config.URL_BUSCA_MENSAGENS,id);
                 JSON_STRING = s;
                 return s;
             }
         }
-        GetJSON gj = new GetJSON();
-        gj.execute();
+        buscaMensagens buscaMens = new buscaMensagens();
+        buscaMens.execute();
     }
 
-    private void showEmployee(){
+    private void mostraListaMensagens(){
 
         JSONObject jsonObject = null;
         ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String, String>>();
@@ -298,8 +297,8 @@ public class PerfilAutonomo extends AppCompatActivity {
 
                 HashMap<String,String> employees = new HashMap<>();
                 employees.put(Config.TAG_ID,idMensagem);
-                employees.put(Config.TAG_COMENTARIO,mensagem);
-                employees.put(Config.TAG_NOME,nome);
+                employees.put(Config.TAG_COMENTARIO,"  "+mensagem);
+                employees.put(Config.TAG_NOME,"  "+nome);
                 employees.put(Config.TAG_ID_USUARIO,idUsuario);
                 employees.put(Config.TAG_ID_SERVICO,idServico);
 
@@ -338,10 +337,16 @@ public class PerfilAutonomo extends AppCompatActivity {
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
                 loading.dismiss();
+                Toast.makeText(PerfilAutonomo.this,s,Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(PerfilAutonomo.this, PerfilAutonomo.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("id", id);
-                intent.putExtras(bundle);
+
+                intent.putExtra(Config.NOMESERVICO,nomeServico);
+                intent.putExtra(Config.NOME_USUARIO,nomeAutonomo);
+                intent.putExtra(Config.RECOMENDACAO,recomendacao);
+                intent.putExtra(Config.SERVICO_ID,id);
+                intent.putExtra(Config.DIA,dia);
+                intent.putExtra(Config.TURNO,turno);
+
                 startActivity(intent);
                 finish();
             }
@@ -350,6 +355,8 @@ public class PerfilAutonomo extends AppCompatActivity {
             protected String doInBackground(Void... params) {
                 AcessoWeb rh = new AcessoWeb();
                 String s = rh.sendGetRequestParam(Config.URL_DELETAR_MENSAGEM, idMens);
+                //Log.d("=====> Id Mensagem: ",idMens);
+                //Log.d("==> Resposta Servidor: ",s);
                 return s;
             }
         }
