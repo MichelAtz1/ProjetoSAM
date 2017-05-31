@@ -1,9 +1,5 @@
 package br.desenvolvedor.michelatz.projetosam.ConexaoWEB;
 
-/**
- * Created by Michel Atz on 10/05/2017.
- */
-
 public class Config {
 
     //endereços web

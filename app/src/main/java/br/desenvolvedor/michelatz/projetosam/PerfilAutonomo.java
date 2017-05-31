@@ -9,12 +9,10 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -295,17 +293,17 @@ public class PerfilAutonomo extends AppCompatActivity {
                 String idUsuario = jo.getString(Config.TAG_ID_USUARIO);
                 String idServico = jo.getString(Config.TAG_ID);
 
-                HashMap<String,String> employees = new HashMap<>();
-                employees.put(Config.TAG_ID,idMensagem);
-                employees.put(Config.TAG_COMENTARIO,"  "+mensagem);
-                employees.put(Config.TAG_NOME,"  "+nome);
-                employees.put(Config.TAG_ID_USUARIO,idUsuario);
-                employees.put(Config.TAG_ID_SERVICO,idServico);
+                HashMap<String,String> dadosMensagens = new HashMap<>();
+                dadosMensagens.put(Config.TAG_ID,idMensagem);
+                dadosMensagens.put(Config.TAG_COMENTARIO,"  "+mensagem);
+                dadosMensagens.put(Config.TAG_NOME,"  "+nome);
+                dadosMensagens.put(Config.TAG_ID_USUARIO,idUsuario);
+                dadosMensagens.put(Config.TAG_ID_SERVICO,idServico);
 
                 Mensagem item1 = new Mensagem(idMensagem,mensagem,nome,idUsuario,idServico);
                 itens.add(item1);
 
-                list.add(employees);
+                list.add(dadosMensagens);
             }
 
         } catch (JSONException e) {

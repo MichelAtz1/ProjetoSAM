@@ -11,10 +11,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import br.desenvolvedor.michelatz.projetosam.Modelo.Mensagem;
 
-/**
- * Created by Michel Atz on 26/05/2017.
- */
-
 public class AdapterListView extends BaseAdapter {
 
     private LayoutInflater mInflater;

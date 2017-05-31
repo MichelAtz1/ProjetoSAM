@@ -1,9 +1,5 @@
 package br.desenvolvedor.michelatz.projetosam.Modelo;
 
-/**
- * Created by Michel Atz on 26/05/2017.
- */
-
 public class Mensagem {
 
     private String id;

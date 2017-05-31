@@ -14,10 +14,6 @@ import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
 
-/**
- * Created by Michel Atz on 10/05/2017.
- */
-
 public class AcessoWeb {
 
     // Método para enviar httpPostRequest
