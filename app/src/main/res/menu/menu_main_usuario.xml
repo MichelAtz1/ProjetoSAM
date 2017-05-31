@@ -1,0 +1,50 @@
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="br.desenvolvedor.michelatz.cidadesemmosquito.PrincipalActivity">
+
+    <item
+        android:title="Menu"
+        android:id="@+id/action_Menu"
+        android:orderInCategory="100"
+        app:showAsAction="never">
+
+        <menu>
+            <item
+                android:title="Inicio"
+                android:id="@+id/acao_usuario_inicio"
+                android:icon="@drawable/inicio"/>
+
+            <item
+                android:title="Gerenciar Perfil"
+                android:id="@+id/acao_usuario_perfil"
+                android:icon="@drawable/usuario"/>
+
+            <item
+                android:title="Buscar Serviço"
+                android:id="@+id/acao_usuario_buscar"
+                android:icon="@drawable/perquisa"/>
+
+            <item
+                android:title="Adicionar Serviço"
+                android:id="@+id/acao_usuario_adicionar"
+                android:icon="@drawable/add"/>
+
+            <item
+                android:title="Listar Serviços"
+                android:id="@+id/acao_usuario_listar"
+                android:icon="@drawable/listapreta"/>
+
+            <item
+                android:title="Chat"
+                android:id="@+id/acao_usuario_chat"
+                android:icon="@drawable/chat"/>
+
+            <item
+                android:title="Sair"
+                android:id="@+id/acao_usuario_sair"
+                android:icon="@drawable/sair"/>
+
+        </menu>
+    </item>
+</menu>

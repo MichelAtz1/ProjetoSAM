@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="br.desenvolvedor.michelatz.projetosam.InicioUsuario">
+
+    <item
+        android:title="Início"
+        android:id="@+id/acao_inicio"
+        android:orderInCategory="100"
+        android:icon="@drawable/iniciobranc"
+        app:showAsAction="always"/>
+
+    <item
+        android:title="Usuário"
+        android:id="@+id/acao_usuario"
+        android:orderInCategory="100"
+        android:icon="@drawable/usuariobranco"
+        app:showAsAction="always"/>
+
+    <item
+        android:title="Adicionar"
+        android:id="@+id/acao_adicionar"
+        android:orderInCategory="100"
+        android:icon="@drawable/addbranco"
+        app:showAsAction="always"/>
+
+    <item
+        android:title=""
+        android:id="@+id/espaco1"
+        android:orderInCategory="100"
+        app:showAsAction="always"/>
+
+    <item
+        android:title="Chat"
+        android:orderInCategory="100"
+        android:id="@+id/acao_chat"
+        android:icon="@drawable/chatbranco"
+        app:showAsAction="always"/>
+
+    <item
+        android:title=""
+        android:id="@+id/espaco2"
+        android:orderInCategory="100"
+        app:showAsAction="always"/>
+
+
+</menu>
