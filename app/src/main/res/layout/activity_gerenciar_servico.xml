@@ -47,28 +47,40 @@
 
                 <TableRow
                     android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_marginTop="10dp"
-                    android:layout_width="match_parent">
+                    android:gravity="center_horizontal">
 
-                    <Spinner
-                        android:layout_width="180dp"
-                        android:id="@+id/spinnerServico2"
-                        android:layout_span="2"
-                        android:layout_marginTop="-50dp"
-                        style="@style/spinner_style"
-                        android:layout_height="45dp" />
-
-                    <Button
-                        android:text="+"
-                        android:layout_width="20dp"
-                        android:layout_marginTop="13dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginLeft="10dp"
-                        android:textSize="25dp"
+                    <TextView
+                        android:text="  Serviço:"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_span="3"
                         android:textStyle="bold"
-                        android:background="@drawable/botao"
-                        android:layout_height="55dp"
-                        android:id="@+id/button" />
+                        android:typeface="sans"
+                        android:textSize="17dp" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:gravity="center_horizontal">
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName"
+                        android:layout_span="3"
+                        android:textStyle="italic"
+                        android:typeface="sans"
+                        android:ems="10"
+                        android:id="@+id/edtServico"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:hint="Serviço..." />
 
                 </TableRow>
 

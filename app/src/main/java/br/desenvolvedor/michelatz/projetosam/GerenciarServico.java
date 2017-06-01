@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -34,6 +35,7 @@ import br.desenvolvedor.michelatz.projetosam.ConexaoWEB.Config;
 public class GerenciarServico extends AppCompatActivity {
 
     private String id;
+    private String nomeServico;
     private Toolbar mToobar;
     private Toolbar mToobarBotton;
 
@@ -42,10 +44,12 @@ public class GerenciarServico extends AppCompatActivity {
     private RadioButton btQualquer, btManha, btTarde, btNoite;
     private RadioButton btQualquerDia, btSemana, btFinalSemana;
 
-    ArrayList<String> servicos = new ArrayList<String>();
+    private EditText edtServico;
 
-    static Spinner comboServicos;
-    ArrayAdapter adapter;
+    //ArrayList<String> servicos = new ArrayList<String>();
+
+    //static Spinner comboServicos;
+   // ArrayAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +61,8 @@ public class GerenciarServico extends AppCompatActivity {
 
         radioTurno = (RadioGroup) findViewById(R.id.RadioGrupTurno);
         radioDia = (RadioGroup) findViewById(R.id.RadioGrupDia);
+
+        edtServico = (EditText) findViewById(R.id.edtServico);
 
         btQualquer = (RadioButton) findViewById(R.id.qualquer);
         btManha = (RadioButton) findViewById(R.id.manha);
@@ -103,13 +109,13 @@ public class GerenciarServico extends AppCompatActivity {
         });
         mToobarBotton.inflateMenu(R.menu.menu_botton_usuario);
 
-        comboServicos = (Spinner)findViewById(R.id.spinnerServico2);
-        servicos.add("Selecione um serviço");
-        buscaListaServicos();
+        //comboServicos = (Spinner)findViewById(R.id.spinnerServico2);
+        //servicos.add("Selecione um serviço");
+        //buscaListaServicos();
 
-        adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item,servicos);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        comboServicos.setAdapter(adapter);
+        //adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item,servicos);
+        //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //comboServicos.setAdapter(adapter);
 
         buscarDadosServico(id);
     }
@@ -146,11 +152,13 @@ public class GerenciarServico extends AppCompatActivity {
             JSONObject jsonObject = new JSONObject(json);
             JSONArray result = jsonObject.getJSONArray(Config.TAG_JSON_ARRAY);
             JSONObject c = result.getJSONObject(0);
-            String nomeServico = c.getString(Config.TAG_NOME_SERVICO);
+            nomeServico = c.getString(Config.TAG_NOME_SERVICO);
             String turno = c.getString(Config.TAG_TURNO);
             String dia = c.getString(Config.TAG_DIA);
 
-            comboServicos.setSelection(adapter.getPosition(nomeServico));
+            //comboServicos.setSelection(adapter.getPosition(nomeServico));
+
+            edtServico.setText(nomeServico);
 
             if(turno.equals("0")){
                 radioTurno.check(R.id.qualquer);
@@ -173,7 +181,7 @@ public class GerenciarServico extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
+/*
     private void buscaListaServicos(){
 
         class buscaServicos extends AsyncTask<Void,Void,String> {
@@ -218,7 +226,7 @@ public class GerenciarServico extends AppCompatActivity {
         buscaServicos buscServ = new buscaServicos();
         buscServ.execute();
     }
-
+*/
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_main_usuario,menu);
@@ -277,10 +285,10 @@ public class GerenciarServico extends AppCompatActivity {
         int selectedIdTurno = radioTurno.getCheckedRadioButtonId();
         int selectedIdDia = radioDia.getCheckedRadioButtonId();
 
-        String ServicoSelecionado = comboServicos.getSelectedItem().toString();
-        if(ServicoSelecionado.equals("Selecione um serviço")){
-            Toast.makeText(GerenciarServico.this,"Por Favor! Selecione um serviço!", Toast.LENGTH_SHORT).show();
-        }else {
+        //String ServicoSelecionado = comboServicos.getSelectedItem().toString();
+        //if(ServicoSelecionado.equals("Selecione um serviço")){
+            //Toast.makeText(GerenciarServico.this,"Por Favor! Selecione um serviço!", Toast.LENGTH_SHORT).show();
+        //}else {
 
             if (selectedIdTurno == btQualquer.getId()) {
                 turno = "0";
@@ -300,8 +308,8 @@ public class GerenciarServico extends AppCompatActivity {
                 dia = "2";
             }
 
-            editarServico(ServicoSelecionado, turno, dia);
-        }
+            editarServico(nomeServico, turno, dia);
+        //}
     }
 
     private void editarServico(final String servicoSelecionado, final String turno, final String dia) {
