@@ -78,7 +78,7 @@ public class CadastrarServico extends AppCompatActivity {
                         it = new Intent(CadastrarServico.this, GerenciarUsuario.class);
                         break;
                     case R.id.acao_buscar:
-                        it = new Intent(CadastrarServico.this, PrincipalActivity.class);
+                        it = new Intent(CadastrarServico.this, BuscarServico.class);
                         break;
                     case R.id.acao_adicionar:
                         it = new Intent(CadastrarServico.this, CadastrarServico.class);
@@ -87,7 +87,7 @@ public class CadastrarServico extends AppCompatActivity {
                         it = new Intent(CadastrarServico.this, ListaServico.class);
                         break;
                     case R.id.acao_chat:
-                        it = new Intent(CadastrarServico.this, PrincipalActivity.class);
+                        it = new Intent(CadastrarServico.this, ChatLista.class);
                         break;
                 }
                 startActivity(it);
@@ -171,7 +171,7 @@ public class CadastrarServico extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.acao_usuario_buscar:
-                startActivity(new Intent(this,PrincipalActivity.class));
+                startActivity(new Intent(this,BuscarServico.class));
                 finish();
                 return true;
             case R.id.acao_usuario_adicionar:
@@ -182,13 +182,14 @@ public class CadastrarServico extends AppCompatActivity {
                 startActivity(new Intent(this,ListaServico.class));
                 finish();
             case R.id.acao_usuario_chat:
-                startActivity(new Intent(this,PrincipalActivity.class));
+                startActivity(new Intent(this,ChatLista.class));
                 finish();
                 return true;
             case R.id.acao_usuario_sair:
                 SharedPreferences sharedpreferences = getSharedPreferences(Login.MyPREFERENCES, Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedpreferences.edit();
                 editor.remove("idKey");
+                editor.remove("nomeKey");
 
                 editor.commit();
                 editor.clear();
@@ -229,6 +230,7 @@ public class CadastrarServico extends AppCompatActivity {
         alertDialog.show();
 
     }
+
     private void adicionarTipoServico(final String novoServico) {
 
         class adicionarTipoServico extends AsyncTask<Void,Void,String>{

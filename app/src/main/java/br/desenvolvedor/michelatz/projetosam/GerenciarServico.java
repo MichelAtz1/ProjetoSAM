@@ -93,7 +93,7 @@ public class GerenciarServico extends AppCompatActivity {
                         it = new Intent(GerenciarServico.this, ListaServico.class);
                         break;
                     case R.id.acao_chat:
-                        it = new Intent(GerenciarServico.this, PrincipalActivity.class);
+                        it = new Intent(GerenciarServico.this, ChatLista.class);
                         break;
                 }
                 startActivity(it);
@@ -250,7 +250,7 @@ public class GerenciarServico extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.acao_usuario_chat:
-                startActivity(new Intent(this,PrincipalActivity.class));
+                startActivity(new Intent(this,ChatLista.class));
                 finish();
                 return true;
             case R.id.acao_usuario_sair:

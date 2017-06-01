@@ -89,7 +89,7 @@ public class BuscarServico extends AppCompatActivity {
                         it = new Intent(BuscarServico.this, ListaServico.class);
                         break;
                     case R.id.acao_chat:
-                        it = new Intent(BuscarServico.this, PrincipalActivity.class);
+                        it = new Intent(BuscarServico.this, ChatLista.class);
                         break;
                 }
                 startActivity(it);
@@ -137,13 +137,14 @@ public class BuscarServico extends AppCompatActivity {
                 startActivity(new Intent(this,ListaServico.class));
                 finish();
             case R.id.acao_usuario_chat:
-                startActivity(new Intent(this,PrincipalActivity.class));
+                startActivity(new Intent(this,ChatLista.class));
                 finish();
                 return true;
             case R.id.acao_usuario_sair:
                 SharedPreferences sharedpreferences = getSharedPreferences(Login.MyPREFERENCES, Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedpreferences.edit();
                 editor.remove("idKey");
+                editor.remove("nomeKey");
 
                 editor.commit();
                 editor.clear();

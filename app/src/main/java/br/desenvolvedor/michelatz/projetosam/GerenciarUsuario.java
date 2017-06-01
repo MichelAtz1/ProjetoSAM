@@ -71,7 +71,7 @@ public class GerenciarUsuario extends AppCompatActivity {
                         it = new Intent(GerenciarUsuario.this, ListaServico.class);
                         break;
                     case R.id.acao_chat:
-                        it = new Intent(GerenciarUsuario.this, PrincipalActivity.class);
+                        it = new Intent(GerenciarUsuario.this, ChatLista.class);
                         break;
                 }
                 startActivity(it);
@@ -101,11 +101,11 @@ public class GerenciarUsuario extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.acao_usuario_perfil:
-                startActivity(new Intent(this,BuscarServico.class));
+                startActivity(new Intent(this,GerenciarUsuario.class));
                 finish();
                 return true;
             case R.id.acao_usuario_buscar:
-                startActivity(new Intent(this,PrincipalActivity.class));
+                startActivity(new Intent(this,BuscarServico.class));
                 finish();
                 return true;
             case R.id.acao_usuario_adicionar:
@@ -117,7 +117,7 @@ public class GerenciarUsuario extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.acao_usuario_chat:
-                startActivity(new Intent(this,PrincipalActivity.class));
+                startActivity(new Intent(this,ChatLista.class));
                 finish();
                 return true;
             case R.id.acao_usuario_sair:
@@ -287,8 +287,7 @@ public class GerenciarUsuario extends AppCompatActivity {
                 SharedPreferences sharedpreferences = getSharedPreferences(Login.MyPREFERENCES, Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedpreferences.edit();
                 editor.remove("idKey");
-                editor.remove("clienteKey");
-                editor.remove("autonomoKey");
+                editor.remove("nomeKey");
 
                 editor.commit();
                 editor.clear();

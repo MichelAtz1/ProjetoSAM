@@ -95,7 +95,7 @@ public class InicioUsuario extends AppCompatActivity implements ListView.OnItemC
                         it = new Intent(InicioUsuario.this, ListaServico.class);
                         break;
                     case R.id.acao_chat:
-                        it = new Intent(InicioUsuario.this, PrincipalActivity.class);
+                        it = new Intent(InicioUsuario.this, ChatLista.class);
                         break;
                 }
                 startActivity(it);
@@ -137,7 +137,7 @@ public class InicioUsuario extends AppCompatActivity implements ListView.OnItemC
                 finish();
                 return true;
             case R.id.acao_usuario_chat:
-                startActivity(new Intent(this,PrincipalActivity.class));
+                startActivity(new Intent(this,ChatLista.class));
                 finish();
                 return true;
             case R.id.acao_usuario_sair:

@@ -68,7 +68,7 @@ public class ListaServico extends AppCompatActivity implements ListView.OnItemCl
                         it = new Intent(ListaServico.this, ListaServico.class);
                         break;
                     case R.id.acao_chat:
-                        it = new Intent(ListaServico.this, PrincipalActivity.class);
+                        it = new Intent(ListaServico.this, ChatLista.class);
                         break;
                 }
                 startActivity(it);
@@ -109,7 +109,7 @@ public class ListaServico extends AppCompatActivity implements ListView.OnItemCl
                 startActivity(new Intent(this,ListaServico.class));
                 finish();
             case R.id.acao_usuario_chat:
-                startActivity(new Intent(this,PrincipalActivity.class));
+                startActivity(new Intent(this,ChatLista.class));
                 finish();
                 return true;
             case R.id.acao_usuario_sair:
@@ -127,7 +127,6 @@ public class ListaServico extends AppCompatActivity implements ListView.OnItemCl
         }
         return super.onOptionsItemSelected(item);
     }
-
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

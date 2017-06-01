@@ -67,7 +67,7 @@ public class ListaAutonomos extends AppCompatActivity implements ListView.OnItem
                         it = new Intent(ListaAutonomos.this, ListaServico.class);
                         break;
                     case R.id.acao_chat:
-                        it = new Intent(ListaAutonomos.this, PrincipalActivity.class);
+                        it = new Intent(ListaAutonomos.this, ChatLista.class);
                         break;
                 }
                 startActivity(it);
@@ -92,6 +92,7 @@ public class ListaAutonomos extends AppCompatActivity implements ListView.OnItem
         listAutonomos.setOnItemClickListener(this);
         buscarListaServico(nomeServicoSelecionado, turno, dia, recomendacao);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu_main_usuario,menu);
@@ -122,7 +123,7 @@ public class ListaAutonomos extends AppCompatActivity implements ListView.OnItem
                 startActivity(new Intent(this,ListaServico.class));
                 finish();
             case R.id.acao_usuario_chat:
-                startActivity(new Intent(this,PrincipalActivity.class));
+                startActivity(new Intent(this,ChatLista.class));
                 finish();
                 return true;
             case R.id.acao_usuario_sair:
