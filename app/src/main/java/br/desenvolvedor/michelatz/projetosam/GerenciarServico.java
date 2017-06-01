@@ -172,9 +172,9 @@ public class GerenciarServico extends AppCompatActivity {
 
             if(dia.equals("0")){
                 radioDia.check(R.id.qualquerDia);
-            } else if(turno.equals("1")){
+            } else if(dia.equals("1")){
                 radioDia.check(R.id.diaSemana);
-            } else if(turno.equals("2")){
+            } else if(dia.equals("2")){
                 radioDia.check(R.id.finalSemana);
             }
         } catch (JSONException e) {
@@ -327,7 +327,7 @@ public class GerenciarServico extends AppCompatActivity {
                 super.onPostExecute(retornoServidor);
                 loading.dismiss();
                 Toast.makeText(GerenciarServico.this, retornoServidor, Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(GerenciarServico.this, PrincipalActivity.class);
+                Intent intent = new Intent(GerenciarServico.this, ListaServico.class);
                 startActivity(intent);
                 finish();
             }

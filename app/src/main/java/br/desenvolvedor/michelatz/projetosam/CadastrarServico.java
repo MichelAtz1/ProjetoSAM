@@ -317,7 +317,7 @@ public class CadastrarServico extends AppCompatActivity {
                 loading.dismiss();
 
                     Toast.makeText(CadastrarServico.this, retornoServidor, Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(CadastrarServico.this, PrincipalActivity.class);
+                    Intent intent = new Intent(CadastrarServico.this, CadastrarServico.class);
                     startActivity(intent);
                     finish();
             }

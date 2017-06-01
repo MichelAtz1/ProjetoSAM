@@ -1,13 +1,17 @@
 package br.desenvolvedor.michelatz.projetosam;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
+import android.text.Spanned;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -104,6 +108,31 @@ public class InicioUsuario extends AppCompatActivity implements ListView.OnItemC
             }
         });
         mToobarBotton.inflateMenu(R.menu.menu_botton_usuario);
+    }
+
+    public void botaoAjuda(View v) {
+        Spanned result;
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            result = Html.fromHtml("<b>Bem vindo ao SAM!</b><p>Aqui irá o texto explicando o ToolBar abaixo!</p>",Html.FROM_HTML_MODE_LEGACY);
+        } else {
+            result = Html.fromHtml("<b>Bem vindo ao SAM!</b><p>Aqui irá o texto explicando o ToolBar abaixo!</p>");
+        }
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle("Ajuda");
+        alertDialogBuilder.setMessage(result);
+
+        alertDialogBuilder.setPositiveButton("OK",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+
+                    }
+                });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+
     }
 
     @Override
