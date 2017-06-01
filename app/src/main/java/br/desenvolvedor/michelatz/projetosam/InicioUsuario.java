@@ -302,4 +302,13 @@ public class InicioUsuario extends AppCompatActivity implements ListView.OnItemC
 
         listServicosUtilizados.setAdapter(adapter);
     }
+
+    @Override
+    public void onBackPressed(){
+        Intent it;
+        it = new Intent(this, InicioUsuario.class);
+        startActivity(it);
+        finish();
+        super.onBackPressed();
+    }
 }

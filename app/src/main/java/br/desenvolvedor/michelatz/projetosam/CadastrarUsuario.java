@@ -201,4 +201,13 @@ public class CadastrarUsuario extends AppCompatActivity {
         adicionarUsuario addUsuario = new adicionarUsuario();
         addUsuario.execute();
     }
+
+    @Override
+    public void onBackPressed(){
+        Intent it;
+        it = new Intent(this, Login.class);
+        startActivity(it);
+        finish();
+        super.onBackPressed();
+    }
 }

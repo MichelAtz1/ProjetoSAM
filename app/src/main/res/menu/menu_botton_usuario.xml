@@ -5,35 +5,35 @@
     tools:context="br.desenvolvedor.michelatz.projetosam.InicioUsuario">
 
     <item
-        android:title="Gerenciar Perfil"
+        android:title="Gerenciar seu Perfil"
         android:id="@+id/acao_usuario"
         android:orderInCategory="100"
         android:icon="@drawable/usuariobranco"
         app:showAsAction="always"/>
 
     <item
-        android:title="Buscar Serviço"
+        android:title="Buscar um Serviço"
         android:id="@+id/acao_buscar"
         android:orderInCategory="100"
         android:icon="@drawable/pesquisabranco"
         app:showAsAction="always"/>
 
     <item
-        android:title="Adicionar Serviço"
+        android:title="Adicionar um Serviço"
         android:id="@+id/acao_adicionar"
         android:orderInCategory="100"
         android:icon="@drawable/addbranco"
         app:showAsAction="always"/>
 
     <item
-        android:title="Listar Serviços"
+        android:title="Listar seus Serviços Cadastrados"
         android:id="@+id/acao_listar"
         android:orderInCategory="100"
         android:icon="@drawable/listabranca"
         app:showAsAction="always"/>
 
     <item
-        android:title="Chat"
+        android:title="abrir Chat"
         android:orderInCategory="100"
         android:id="@+id/acao_chat"
         android:icon="@drawable/chatbranco"

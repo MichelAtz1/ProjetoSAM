@@ -344,4 +344,13 @@ public class CadastrarServico extends AppCompatActivity {
         adicionarServico addServico = new adicionarServico();
         addServico.execute();
     }
+
+    @Override
+    public void onBackPressed(){
+        Intent it;
+        it = new Intent(this, InicioUsuario.class);
+        startActivity(it);
+        finish();
+        super.onBackPressed();
+    }
 }

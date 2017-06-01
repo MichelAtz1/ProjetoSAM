@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +40,7 @@ public class PerfilAutonomo extends AppCompatActivity {
     private TextView edtServico;
     private TextView edtDiasDisponiveis;
     private EditText edtComentario;
+    private ImageView img;
 
     private String JSON_STRING;
     private ListView listView;
@@ -64,6 +66,7 @@ public class PerfilAutonomo extends AppCompatActivity {
         edtDiasDisponiveis = (TextView) findViewById(R.id.txDia);
         edtTurnoDisponivel = (TextView) findViewById(R.id.txTurno);
         edtComentario = (EditText) findViewById(R.id.edtComentario);
+        img= (ImageView) findViewById(R.id.imageFavorito);
 
         showDados(id,nomeServico,nomeAutonomo,recomendacao, dia, turno);
 
@@ -93,7 +96,7 @@ public class PerfilAutonomo extends AppCompatActivity {
                         it = new Intent(PerfilAutonomo.this, ListaServico.class);
                         break;
                     case R.id.acao_chat:
-                        it = new Intent(PerfilAutonomo.this, PrincipalActivity.class);
+                        it = new Intent(PerfilAutonomo.this, ChatLista.class);
                         break;
                 }
                 startActivity(it);
@@ -166,7 +169,7 @@ public class PerfilAutonomo extends AppCompatActivity {
                 startActivity(new Intent(this,ListaServico.class));
                 finish();
             case R.id.acao_usuario_chat:
-                startActivity(new Intent(this,PrincipalActivity.class));
+                startActivity(new Intent(this, ChatLista.class));
                 finish();
                 return true;
             case R.id.acao_usuario_sair:
@@ -362,4 +365,32 @@ public class PerfilAutonomo extends AppCompatActivity {
         DeletarMensagem de = new DeletarMensagem();
         de.execute();
     }
+
+    public void recomendar(View v){
+        img.setImageResource(R.drawable.favoritomarcado);
+    }
+
+    private void verificaEstrela(){
+
+    }
+
+    public void abrirChat(View v){
+        startActivity(new Intent(this,ChatConversa.class));
+        finish();
+    }
+
+    @Override
+    public void onBackPressed(){
+        Intent it;
+        it = new Intent(this, ListaAutonomos.class);
+        it.putExtra(Config.NOMESERVICO,nomeServico);
+        it.putExtra(Config.DIA,dia);
+        it.putExtra(Config.TURNO,turno);
+        it.putExtra(Config.RECOMENDACAO,recomendacao);
+
+        startActivity(it);
+        finish();
+        super.onBackPressed();
+    }
+
 }

@@ -206,4 +206,13 @@ public class ListaServico extends AppCompatActivity implements ListView.OnItemCl
 
         listServicosOferecidos.setAdapter(adapter);
     }
+
+    @Override
+    public void onBackPressed(){
+        Intent it;
+        it = new Intent(this, InicioUsuario.class);
+        startActivity(it);
+        finish();
+        super.onBackPressed();
+    }
 }

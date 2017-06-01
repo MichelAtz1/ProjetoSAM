@@ -399,4 +399,13 @@ public class GerenciarServico extends AppCompatActivity {
         deletarServico deletaservico = new deletarServico();
         deletaservico.execute();
     }
+
+    @Override
+    public void onBackPressed(){
+        Intent it;
+        it = new Intent(this, ListaServico.class);
+        startActivity(it);
+        finish();
+        super.onBackPressed();
+    }
 }

@@ -44,7 +44,7 @@ public class ListaAutonomos extends AppCompatActivity implements ListView.OnItem
         mToobar  = (Toolbar) findViewById(R.id.tb_main);
         mToobar.setTitle("  SAM");
         mToobar.setLogo(R.drawable.iconsam);
-        mToobar.setSubtitle("  Buscar Serviço");
+        mToobar.setSubtitle("  Lista Autônomos");
         setSupportActionBar(mToobar);
 
         mToobarBotton = (Toolbar) findViewById(R.id.inc_tb_botton_usuario);
@@ -236,5 +236,14 @@ public class ListaAutonomos extends AppCompatActivity implements ListView.OnItem
 
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void onBackPressed(){
+        Intent it;
+        it = new Intent(this, BuscarServico.class);
+        startActivity(it);
+        finish();
+        super.onBackPressed();
     }
 }
