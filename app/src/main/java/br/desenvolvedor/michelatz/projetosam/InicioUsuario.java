@@ -29,6 +29,8 @@ import java.util.HashMap;
 
 import br.desenvolvedor.michelatz.projetosam.ConexaoWEB.AcessoWeb;
 import br.desenvolvedor.michelatz.projetosam.ConexaoWEB.Config;
+import br.desenvolvedor.michelatz.projetosam.Conversas.ChatLista;
+import br.desenvolvedor.michelatz.projetosam.Mensagens.ChatConversa;
 
 public class InicioUsuario extends AppCompatActivity implements ListView.OnItemClickListener{
 
@@ -166,7 +168,7 @@ public class InicioUsuario extends AppCompatActivity implements ListView.OnItemC
                 finish();
                 return true;
             case R.id.acao_usuario_chat:
-                startActivity(new Intent(this,ChatLista.class));
+                startActivity(new Intent(this,ChatConversa.class));
                 finish();
                 return true;
             case R.id.acao_usuario_sair:

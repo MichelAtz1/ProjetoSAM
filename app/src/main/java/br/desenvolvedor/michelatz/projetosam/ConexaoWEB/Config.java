@@ -20,6 +20,12 @@ public class Config {
     public static final String URL_INSERIR_MENSAGEM = "http://projetosw.esy.es/conexao/addMensagens.php";
     public static final String URL_BUSCA_MENSAGENS = "http://projetosw.esy.es/conexao/buscaMensagens.php?idServico=";
     public static final String URL_DELETAR_MENSAGEM = "http://projetosw.esy.es/conexao/excluirMensagem.php?id=";
+    public static final String URL_BUSCA_RECOMENDACAO = "http://projetosw.esy.es/conexao/buscaRecomendacao.php";
+    public static final String URL_LISTAR_CHAT = "http://projetosw.esy.es/conexao/buscaMensagensChat.php";
+
+
+    //CHAT
+    public static final String URL_INSERIR_MENSAGEM_CHAT = "http://projetosw.esy.es/conexao/chatInserirMensagem.php";
 
 
     //Chaves que seram usadas nos scripts PHPs
@@ -39,6 +45,19 @@ public class Config {
     public static final String KEY_TIPO_SERVICO_NOME  = "nomeTipoServico";
     public static final String KEY_RECOMENDACAO  = "recomendacao";
     public static final String KEY_SERVICO_MENSAGEM  = "comentario";
+    public static final String KEY_ID_AUTONOMO  = "idAutonomo";
+
+    //CHAT
+    public static final String KEY_EMISSOR  = "idEmissor";
+    public static final String KEY_RECEPTOR  = "idReceptor";
+    public static final String KEY_MENSAGEM_CHAT  = "mensagem";
+    public static final String KEY_ID_SERVICO  = "idServico";
+    public static final String KEY_HORARIO  = "horario";
+    public static final String KEY_ID_MENSAGEM  = "id";
+
+    public static final String KEY_CHAT_ID_RECEPTOR = "idReceptor";
+    public static final String KEY_CHAT_ID_EMISSOR = "idEmissor";
+    public static final String KEY_CHAT_ID_SERVICO = "idServico";
 
     //Tags JSON
     public static final String TAG_JSON_ARRAY="result";
@@ -63,4 +82,5 @@ public class Config {
     public static final String RECOMENDACAO = "recomendacao";
     public static final String NOMESERVICO = "nomeServico";
     public static final String NOME_USUARIO = "nomeUsuario";
+    public static final String ID_AUTONOMO = "idAutonomo";
 }

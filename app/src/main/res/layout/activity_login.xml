@@ -69,7 +69,8 @@
                         android:textColor="#fff"
                         android:id="@+id/edtEmailUsuario"
                         android:hint=" Insira seu E-mail..."
-                        android:textColorHint="#FFF" />
+                        android:textColorHint="#FFF"
+                        android:drawableLeft="@drawable/ic_action_mail"/>
 
                 </TableRow>
 
@@ -100,7 +101,8 @@
                         android:textColor="#fff"
                         android:id="@+id/edtSenhaUsuario"
                         android:hint=" Insira sua Senha..."
-                        android:textColorHint="#FFF" />
+                        android:textColorHint="#FFF"
+                        android:drawableLeft="@drawable/ic_action_lock_closed"/>
 
                 </TableRow>
 

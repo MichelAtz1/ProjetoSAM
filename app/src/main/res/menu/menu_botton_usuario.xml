@@ -8,7 +8,7 @@
         android:title="Gerenciar seu Perfil"
         android:id="@+id/acao_usuario"
         android:orderInCategory="100"
-        android:icon="@drawable/usuariobranco"
+        android:icon="@drawable/ic_account_circle"
         app:showAsAction="always"/>
 
     <item
@@ -20,6 +20,7 @@
 
     <item
         android:title="Adicionar um Serviço"
+        android:layout_width="300dp"
         android:id="@+id/acao_adicionar"
         android:orderInCategory="100"
         android:icon="@drawable/addbranco"

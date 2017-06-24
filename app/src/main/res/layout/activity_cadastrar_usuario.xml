@@ -76,7 +76,8 @@
                         android:typeface="sans"
                         android:ems="10"
                         android:id="@+id/edtNome"
-                        android:hint="Insira seu nome..." />
+                        android:hint="Insira seu nome..."
+                        android:drawableLeft="@drawable/ic_action_user" />
 
                 </TableRow>
 
@@ -111,7 +112,8 @@
                         android:hint="Insira seu e-mail..."
                         android:layout_span="2"
                         android:textStyle="italic"
-                        android:typeface="sans" />
+                        android:typeface="sans"
+                        android:drawableLeft="@drawable/ic_action_mail"/>
 
 
                 </TableRow>
@@ -149,7 +151,8 @@
                         android:textStyle="italic"
                         android:typeface="sans"
                         android:layout_span="2"
-                        android:hint="Insira sua senha..." />
+                        android:hint="Insira sua senha..."
+                        android:drawableLeft="@drawable/ic_action_lock_closed"/>
 
 
                 </TableRow>

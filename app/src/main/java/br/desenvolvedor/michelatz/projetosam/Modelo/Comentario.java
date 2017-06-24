@@ -1,6 +1,6 @@
 package br.desenvolvedor.michelatz.projetosam.Modelo;
 
-public class Mensagem {
+public class Comentario {
 
     private String id;
     private String texto;
@@ -9,11 +9,11 @@ public class Mensagem {
     private String idUsuario;
     private String idServico;
 
-    public Mensagem() {
+    public Comentario() {
 
     }
 
-    public Mensagem(String id, String texto, String nome, String idUsuario, String idServico) {
+    public Comentario(String id, String texto, String nome, String idUsuario, String idServico) {
         this.id = id;
         this.texto = texto;
         this.nome = nome;

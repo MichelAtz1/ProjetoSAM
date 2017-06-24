@@ -10,27 +10,23 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
-import android.support.v7.widget.*;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import br.desenvolvedor.michelatz.projetosam.ConexaoWEB.AcessoWeb;
 import br.desenvolvedor.michelatz.projetosam.ConexaoWEB.Config;
+import br.desenvolvedor.michelatz.projetosam.Conversas.ChatLista;
 
 public class GerenciarServico extends AppCompatActivity {
 

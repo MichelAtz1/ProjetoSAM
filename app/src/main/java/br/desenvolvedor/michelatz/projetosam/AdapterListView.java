@@ -9,16 +9,17 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import br.desenvolvedor.michelatz.projetosam.Modelo.Mensagem;
+
+import br.desenvolvedor.michelatz.projetosam.Modelo.Comentario;
 
 public class AdapterListView extends BaseAdapter {
 
     private LayoutInflater mInflater;
-    private ArrayList<Mensagem> itens;
+    private ArrayList<Comentario> itens;
 
     public static String idSelecionado;
 
-    public AdapterListView(Context context, ArrayList<Mensagem> itens) {
+    public AdapterListView(Context context, ArrayList<Comentario> itens) {
         //Itens que preencheram o listview
         this.itens = itens;
         //responsavel por pegar o Layout do item.
@@ -40,7 +41,7 @@ public class AdapterListView extends BaseAdapter {
      * @param position
      * @return
      */
-    public Mensagem getItem(int position) {
+    public Comentario getItem(int position) {
         return itens.get(position);
     }
 
@@ -56,7 +57,7 @@ public class AdapterListView extends BaseAdapter {
 
     public View getView(int position, View view, ViewGroup parent) {
         //Pega o item de acordo com a posção.
-        Mensagem item = itens.get(position);
+        Comentario item = itens.get(position);
         //infla o layout para podermos preencher os dados
         view = mInflater.inflate(R.layout.list_item_mensagem, null);
 
@@ -75,7 +76,7 @@ public class AdapterListView extends BaseAdapter {
     }
 
     public void removeItem(int positionToRemove){
-        Mensagem item = itens.get(positionToRemove);
+        Comentario item = itens.get(positionToRemove);
         idSelecionado = item.getId();
         notifyDataSetChanged();
     }

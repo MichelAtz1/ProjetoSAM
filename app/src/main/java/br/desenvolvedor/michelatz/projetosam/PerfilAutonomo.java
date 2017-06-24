@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,13 +28,17 @@ import java.util.HashMap;
 
 import br.desenvolvedor.michelatz.projetosam.ConexaoWEB.AcessoWeb;
 import br.desenvolvedor.michelatz.projetosam.ConexaoWEB.Config;
-import br.desenvolvedor.michelatz.projetosam.Modelo.Mensagem;
+import br.desenvolvedor.michelatz.projetosam.Conversas.ChatLista;
+import br.desenvolvedor.michelatz.projetosam.Mensagens.ChatConversa;
+import br.desenvolvedor.michelatz.projetosam.Modelo.Comentario;
 
 public class PerfilAutonomo extends AppCompatActivity {
 
     private Toolbar mToobar;
     private Toolbar mToobarBotton;
-    private String id, nomeServico, nomeAutonomo, recomendacao, dia, turno;
+    private String id, idAutonomo, nomeServico, nomeAutonomo, recomendacao, dia, turno;
+
+    private String retornoRecomendacoes;
 
     private TextView edtNome;
     private TextView edtTurnoDisponivel;
@@ -45,7 +50,7 @@ public class PerfilAutonomo extends AppCompatActivity {
     private String JSON_STRING;
     private ListView listView;
     private AdapterListView adapterListView;
-    private ArrayList<Mensagem> itens;
+    private ArrayList<Comentario> itens;
     public static String idUsuarioGlobal = "Isso é uma global";
 
     @Override
@@ -55,6 +60,7 @@ public class PerfilAutonomo extends AppCompatActivity {
 
         Intent intent = getIntent();
         id = intent.getStringExtra(Config.SERVICO_ID);
+        idAutonomo = intent.getStringExtra(Config.ID_AUTONOMO);
         nomeServico = intent.getStringExtra(Config.NOMESERVICO);
         nomeAutonomo = intent.getStringExtra(Config.NOME_USUARIO);
         recomendacao = intent.getStringExtra(Config.RECOMENDACAO);
@@ -67,6 +73,9 @@ public class PerfilAutonomo extends AppCompatActivity {
         edtTurnoDisponivel = (TextView) findViewById(R.id.txTurno);
         edtComentario = (EditText) findViewById(R.id.edtComentario);
         img= (ImageView) findViewById(R.id.imageFavorito);
+
+        buscaRecomendacao();
+        mostraEstrela();
 
         showDados(id,nomeServico,nomeAutonomo,recomendacao, dia, turno);
 
@@ -108,6 +117,60 @@ public class PerfilAutonomo extends AppCompatActivity {
 
         buscaMensagens();
         listView = (ListView) findViewById(R.id.listViewMensagens);
+    }
+
+    private void buscaRecomendacao() {
+
+        class adicionarComentario extends AsyncTask<Void, Void, String> {
+            ProgressDialog loading;
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                loading = ProgressDialog.show(PerfilAutonomo.this, "Buscando Dados...", "Aguarde...", false, false);
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                loading.dismiss();
+                Toast.makeText(PerfilAutonomo.this, s, Toast.LENGTH_LONG).show();
+
+            }
+
+            @Override
+            protected String doInBackground(Void... params) {
+                SharedPreferences sharedpreferences = getSharedPreferences(Login.MyPREFERENCES, Context.MODE_PRIVATE);
+                final String idUser = sharedpreferences.getString("idKey", null);
+
+                HashMap<String, String> hashMap = new HashMap<>();
+                //hashMap.put(Config.KEY_USUARIO_NOME,nomeUser);
+                hashMap.put(Config.KEY_USUARIO_IDLOGADO, idUser);
+                hashMap.put(Config.KEY_SERVICO_IDSERVICO, id);
+
+                AcessoWeb acesso = new AcessoWeb();
+                String retorn = acesso.sendPostRequest(Config.URL_BUSCA_RECOMENDACAO, hashMap);
+                Log.d("=====> Id Comentario: ", retorn);
+                return retorn;
+            }
+        }
+
+        adicionarComentario ue = new adicionarComentario();
+        ue.execute();
+    }
+
+    public void mostraEstrela(){
+
+        //if(retornoRecomendacoes.equals("1")){
+            img.setImageResource(R.drawable.favoritomarcado);
+
+        //}else if(retornoRecomendacoes.equals("0")){
+            //img.setImageResource(R.drawable.favorito);
+
+        //}else if(retornoRecomendacoes.equals("2")){
+            //Log.d("=====> Id Comentario: ",retornoRecomendacoes);
+
+        //}
     }
 
     private void showDados(String id, String nomeServico, String nomeAutonomo, String recomendacao, String dia, String turno) {
@@ -213,6 +276,7 @@ public class PerfilAutonomo extends AppCompatActivity {
                 Intent intent = new Intent(PerfilAutonomo.this, PerfilAutonomo.class);
 
                 intent.putExtra(Config.NOMESERVICO,nomeServico);
+                intent.putExtra(Config.ID_AUTONOMO,idAutonomo);
                 intent.putExtra(Config.NOME_USUARIO,nomeAutonomo);
                 intent.putExtra(Config.RECOMENDACAO,recomendacao);
                 intent.putExtra(Config.SERVICO_ID,id);
@@ -283,7 +347,7 @@ public class PerfilAutonomo extends AppCompatActivity {
 
         JSONObject jsonObject = null;
         ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String, String>>();
-        itens = new ArrayList<Mensagem>();
+        itens = new ArrayList<Comentario>();
         try {
             jsonObject = new JSONObject(JSON_STRING);
             JSONArray result = jsonObject.getJSONArray(Config.TAG_JSON_ARRAY);
@@ -303,7 +367,7 @@ public class PerfilAutonomo extends AppCompatActivity {
                 dadosMensagens.put(Config.TAG_ID_USUARIO,idUsuario);
                 dadosMensagens.put(Config.TAG_ID_SERVICO,idServico);
 
-                Mensagem item1 = new Mensagem(idMensagem,mensagem,nome,idUsuario,idServico);
+                Comentario item1 = new Comentario(idMensagem,mensagem,nome,idUsuario,idServico);
                 itens.add(item1);
 
                 list.add(dadosMensagens);
@@ -331,7 +395,7 @@ public class PerfilAutonomo extends AppCompatActivity {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                loading = ProgressDialog.show(PerfilAutonomo.this, "Deletando Mensagem", "Aguarde...", false, false);
+                loading = ProgressDialog.show(PerfilAutonomo.this, "Deletando Comentario", "Aguarde...", false, false);
             }
 
             @Override
@@ -342,6 +406,7 @@ public class PerfilAutonomo extends AppCompatActivity {
                 Intent intent = new Intent(PerfilAutonomo.this, PerfilAutonomo.class);
 
                 intent.putExtra(Config.NOMESERVICO,nomeServico);
+                intent.putExtra(Config.ID_AUTONOMO,idAutonomo);
                 intent.putExtra(Config.NOME_USUARIO,nomeAutonomo);
                 intent.putExtra(Config.RECOMENDACAO,recomendacao);
                 intent.putExtra(Config.SERVICO_ID,id);
@@ -356,7 +421,7 @@ public class PerfilAutonomo extends AppCompatActivity {
             protected String doInBackground(Void... params) {
                 AcessoWeb rh = new AcessoWeb();
                 String s = rh.sendGetRequestParam(Config.URL_DELETAR_MENSAGEM, idMens);
-                //Log.d("=====> Id Mensagem: ",idMens);
+                //Log.d("=====> Id Comentario: ",idMens);
                 //Log.d("==> Resposta Servidor: ",s);
                 return s;
             }
@@ -375,7 +440,12 @@ public class PerfilAutonomo extends AppCompatActivity {
     }
 
     public void abrirChat(View v){
-        startActivity(new Intent(this,ChatConversa.class));
+        Intent it;
+        it = new Intent(this, ChatConversa.class);
+        it.putExtra(Config.ID_AUTONOMO,idAutonomo);
+        it.putExtra(Config.SERVICO_ID,id);
+
+        startActivity(it);
         finish();
     }
 

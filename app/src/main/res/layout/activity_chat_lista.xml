@@ -4,7 +4,15 @@
     android:id="@+id/activity_chat_lista"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/listachat"
-    tools:context="br.desenvolvedor.michelatz.projetosam.ChatLista">
+    android:background="@drawable/imagem"
+    tools:context="br.desenvolvedor.michelatz.projetosam.Conversas.ChatLista">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/conversaRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/card_view_conversas">
+
+    </android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>

@@ -25,6 +25,7 @@ import java.util.HashMap;
 
 import br.desenvolvedor.michelatz.projetosam.ConexaoWEB.AcessoWeb;
 import br.desenvolvedor.michelatz.projetosam.ConexaoWEB.Config;
+import br.desenvolvedor.michelatz.projetosam.Conversas.ChatLista;
 
 public class ListaServico extends AppCompatActivity implements ListView.OnItemClickListener{
 

@@ -49,8 +49,8 @@
         <activity android:name=".BuscarServico" />
         <activity android:name=".ListaAutonomos" />
         <activity android:name=".PerfilAutonomo" />
-        <activity android:name=".ChatLista" />
-        <activity android:name=".ChatConversa"></activity>
+        <activity android:name=".Conversas.ChatLista" />
+        <activity android:name=".Mensagens.ChatConversa"></activity>
     </application>
 
 </manifest>

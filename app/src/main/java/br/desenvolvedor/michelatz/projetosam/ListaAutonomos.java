@@ -16,7 +16,6 @@ import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,6 +26,7 @@ import java.util.HashMap;
 
 import br.desenvolvedor.michelatz.projetosam.ConexaoWEB.AcessoWeb;
 import br.desenvolvedor.michelatz.projetosam.ConexaoWEB.Config;
+import br.desenvolvedor.michelatz.projetosam.Conversas.ChatLista;
 
 public class ListaAutonomos extends AppCompatActivity implements ListView.OnItemClickListener{
 
@@ -143,7 +143,6 @@ public class ListaAutonomos extends AppCompatActivity implements ListView.OnItem
     }
 
     private void buscarListaServico(final String servicoSelecionado, final String turno, final String dia, final String recomendacao) {
-
         class buscarListaServico extends AsyncTask<Void,Void,String> {
             ProgressDialog loading;
             @Override
@@ -151,7 +150,6 @@ public class ListaAutonomos extends AppCompatActivity implements ListView.OnItem
                 super.onPreExecute();
                 loading = ProgressDialog.show(ListaAutonomos.this,"Buscando Dados","Aguarde...",false,false);
             }
-
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
@@ -159,10 +157,8 @@ public class ListaAutonomos extends AppCompatActivity implements ListView.OnItem
                 JSON_STRING = s;
                 showListagemAutonomos();
             }
-
             @Override
             protected String doInBackground(Void... params) {
-
                 HashMap<String,String> params2 = new HashMap<>();
                 params2.put(Config.KEY_RECOMENDACAO,recomendacao);
                 params2.put(Config.KEY_SERVICO_TURNO,turno);
@@ -185,31 +181,24 @@ public class ListaAutonomos extends AppCompatActivity implements ListView.OnItem
         try {
             jsonObject = new JSONObject(JSON_STRING);
             JSONArray result = jsonObject.getJSONArray(Config.TAG_JSON_ARRAY);
-
             for(int i = 0; i<result.length(); i++){
                 JSONObject jo = result.getJSONObject(i);
                 String id = jo.getString(Config.TAG_ID);
+                String idAutonomo = jo.getString(Config.TAG_ID_USUARIO);
                 String nomeServicoBD = jo.getString(Config.TAG_NOME_SERVICO);
                 String nomeAutonomo = jo.getString(Config.TAG_NOME);
                 String numeroRecomendacoes = jo.getString(Config.TAG_RECOMENDACAO);
-/*
-                Log.d("=====> Id: ",id);
-                Log.d("=====> Nome serviço: ",nomeServicoBD);
-                Log.d("=====> Nome: ",nomeAutonomo);
-                Log.d("=====> Recomendações: ",numeroRecomendacoes);
-*/
                 HashMap<String,String> autonomos = new HashMap<>();
                 autonomos.put(Config.TAG_ID,id);
+                autonomos.put(Config.TAG_ID_USUARIO,idAutonomo);
                 autonomos.put(Config.TAG_NOME_SERVICO,nomeServicoBD);
                 autonomos.put(Config.TAG_NOME,nomeAutonomo);
                 autonomos.put(Config.TAG_RECOMENDACAO,numeroRecomendacoes);
                 list.add(autonomos);
             }
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
         ListAdapter adapter = new SimpleAdapter(
                 ListaAutonomos.this, list, R.layout.list_item_servico_utilizados,
                 new String[]{Config.TAG_NOME_SERVICO,Config.TAG_NOME,Config.TAG_RECOMENDACAO},
@@ -224,12 +213,14 @@ public class ListaAutonomos extends AppCompatActivity implements ListView.OnItem
         Intent intent = new Intent(this,PerfilAutonomo.class);
         HashMap<String,String> map =(HashMap)parent.getItemAtPosition(position);
         String idServicoSelecionado = map.get(Config.TAG_ID).toString();
+        String idAutonomo = map.get(Config.TAG_ID_USUARIO).toString();
         String nomeServico = map.get(Config.TAG_NOME_SERVICO).toString();
         String nomeUsuario = map.get(Config.TAG_NOME).toString();
         String recomendacao = map.get(Config.TAG_RECOMENDACAO).toString();
 
         intent.putExtra(Config.NOMESERVICO,nomeServico);
         intent.putExtra(Config.NOME_USUARIO,nomeUsuario);
+        intent.putExtra(Config.ID_AUTONOMO,idAutonomo);
         intent.putExtra(Config.RECOMENDACAO,recomendacao);
         intent.putExtra(Config.SERVICO_ID,idServicoSelecionado);
         intent.putExtra(Config.DIA,dia);
