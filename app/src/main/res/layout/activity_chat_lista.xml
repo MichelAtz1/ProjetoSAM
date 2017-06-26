@@ -1,16 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_chat_lista"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/imagem"
     tools:context="br.desenvolvedor.michelatz.projetosam.Conversas.ChatLista">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tb_main"
+        android:layout_width="match_parent"
+        android:layout_alignParentLeft="true"
+        android:elevation="4dp"
+        android:minHeight="?attr/actionBarSize"
+        android:layout_height="60dp"
+        android:background="@drawable/botao"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+    <include
+        android:id="@+id/inc_tb_botton_usuario"
+        layout="@layout/toolbar_botton"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/conversaRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="60dp"
         tools:listitem="@layout/card_view_conversas">
 
     </android.support.v7.widget.RecyclerView>

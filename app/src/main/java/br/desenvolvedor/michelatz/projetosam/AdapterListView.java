@@ -70,6 +70,7 @@ public class AdapterListView extends BaseAdapter {
 
         if(!PerfilAutonomo.idUsuarioGlobal.equals(item.getIdUsuario())){
             ImageButton btn = (ImageButton) view.findViewById(R.id.btnDelete);
+            btn.setVisibility(View.GONE);
             btn.setEnabled(false);
         }
         return view;

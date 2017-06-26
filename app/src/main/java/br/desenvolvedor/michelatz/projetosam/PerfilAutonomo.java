@@ -1,7 +1,9 @@
 package br.desenvolvedor.michelatz.projetosam;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -38,7 +40,8 @@ public class PerfilAutonomo extends AppCompatActivity {
     private Toolbar mToobarBotton;
     private String id, idAutonomo, nomeServico, nomeAutonomo, recomendacao, dia, turno;
 
-    private String retornoRecomendacoes;
+    private String idaRecomendacao;
+    private String opcaoRecomendacao;
 
     private TextView edtNome;
     private TextView edtTurnoDisponivel;
@@ -48,10 +51,12 @@ public class PerfilAutonomo extends AppCompatActivity {
     private ImageView img;
 
     private String JSON_STRING;
+    private String JSON_STRING_CONTROLE;
     private ListView listView;
     private AdapterListView adapterListView;
     private ArrayList<Comentario> itens;
     public static String idUsuarioGlobal = "Isso é uma global";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,8 +80,6 @@ public class PerfilAutonomo extends AppCompatActivity {
         img= (ImageView) findViewById(R.id.imageFavorito);
 
         buscaRecomendacao();
-        mostraEstrela();
-
         showDados(id,nomeServico,nomeAutonomo,recomendacao, dia, turno);
 
         mToobar  = (Toolbar) findViewById(R.id.tb_main);
@@ -117,60 +120,6 @@ public class PerfilAutonomo extends AppCompatActivity {
 
         buscaMensagens();
         listView = (ListView) findViewById(R.id.listViewMensagens);
-    }
-
-    private void buscaRecomendacao() {
-
-        class adicionarComentario extends AsyncTask<Void, Void, String> {
-            ProgressDialog loading;
-
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                loading = ProgressDialog.show(PerfilAutonomo.this, "Buscando Dados...", "Aguarde...", false, false);
-            }
-
-            @Override
-            protected void onPostExecute(String s) {
-                super.onPostExecute(s);
-                loading.dismiss();
-                Toast.makeText(PerfilAutonomo.this, s, Toast.LENGTH_LONG).show();
-
-            }
-
-            @Override
-            protected String doInBackground(Void... params) {
-                SharedPreferences sharedpreferences = getSharedPreferences(Login.MyPREFERENCES, Context.MODE_PRIVATE);
-                final String idUser = sharedpreferences.getString("idKey", null);
-
-                HashMap<String, String> hashMap = new HashMap<>();
-                //hashMap.put(Config.KEY_USUARIO_NOME,nomeUser);
-                hashMap.put(Config.KEY_USUARIO_IDLOGADO, idUser);
-                hashMap.put(Config.KEY_SERVICO_IDSERVICO, id);
-
-                AcessoWeb acesso = new AcessoWeb();
-                String retorn = acesso.sendPostRequest(Config.URL_BUSCA_RECOMENDACAO, hashMap);
-                Log.d("=====> Id Comentario: ", retorn);
-                return retorn;
-            }
-        }
-
-        adicionarComentario ue = new adicionarComentario();
-        ue.execute();
-    }
-
-    public void mostraEstrela(){
-
-        //if(retornoRecomendacoes.equals("1")){
-            img.setImageResource(R.drawable.favoritomarcado);
-
-        //}else if(retornoRecomendacoes.equals("0")){
-            //img.setImageResource(R.drawable.favorito);
-
-        //}else if(retornoRecomendacoes.equals("2")){
-            //Log.d("=====> Id Comentario: ",retornoRecomendacoes);
-
-        //}
     }
 
     private void showDados(String id, String nomeServico, String nomeAutonomo, String recomendacao, String dia, String turno) {
@@ -385,7 +334,31 @@ public class PerfilAutonomo extends AppCompatActivity {
     public void deletaItem(View v) {
         adapterListView.removeItem((Integer) v.getTag());
         String idMensagem= adapterListView.idSelecionado;
-        deletarMensagem(idMensagem);
+        confirmarDelete(idMensagem);
+    }
+
+    private void confirmarDelete(final String idMensagem){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage("Tem certeza que deseja deletar esta mensagem?");
+
+        alertDialogBuilder.setPositiveButton("Sim",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        deletarMensagem(idMensagem);
+                    }
+                });
+
+        alertDialogBuilder.setNegativeButton("Não",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+
+                    }
+                });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 
     private void deletarMensagem(final String idMens){
@@ -421,8 +394,6 @@ public class PerfilAutonomo extends AppCompatActivity {
             protected String doInBackground(Void... params) {
                 AcessoWeb rh = new AcessoWeb();
                 String s = rh.sendGetRequestParam(Config.URL_DELETAR_MENSAGEM, idMens);
-                //Log.d("=====> Id Comentario: ",idMens);
-                //Log.d("==> Resposta Servidor: ",s);
                 return s;
             }
         }
@@ -432,11 +403,109 @@ public class PerfilAutonomo extends AppCompatActivity {
     }
 
     public void recomendar(View v){
-        img.setImageResource(R.drawable.favoritomarcado);
+        if(JSON_STRING_CONTROLE.equals("1")) {
+            idaRecomendacao = "0";
+            opcaoRecomendacao ="1";
+            JSON_STRING_CONTROLE = "0";
+            editaRecomendacao();
+        }else if(JSON_STRING_CONTROLE.equals("0")){
+            idaRecomendacao = "1";
+            opcaoRecomendacao ="1";// 0 para insert e 1 para update
+            JSON_STRING_CONTROLE = "1";
+            editaRecomendacao();
+        }else{
+            idaRecomendacao = "1";
+            opcaoRecomendacao ="0";
+            JSON_STRING_CONTROLE = "1";
+            editaRecomendacao();
+        }
     }
 
-    private void verificaEstrela(){
+    private void editaRecomendacao(){
+        class editaRecomendacao extends AsyncTask<Void,Void,String>{
 
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+            }
+
+            @Override
+            protected void onPostExecute(String retornoServidor) {
+                super.onPostExecute(retornoServidor);
+                Log.d("> gerenciamento",retornoServidor);
+                mostraEstrela();
+            }
+
+            @Override
+            protected String doInBackground(Void... params) {
+                SharedPreferences sharedpreferences = getSharedPreferences(Login.MyPREFERENCES, Context.MODE_PRIVATE);
+                String idUser = sharedpreferences.getString("idKey", null);
+
+                HashMap<String,String> hashMap = new HashMap<>();
+                hashMap.put(Config.KEY_SERVICO_RECOMENDACAO, idaRecomendacao);
+                hashMap.put(Config.KEY_SERVICO_IDSERVICO,id);
+                hashMap.put(Config.KEY_SERVICO_IDUSUARIO,idUser);
+                hashMap.put(Config.KEY_SERVICO_TIPO_RECENDACAO,opcaoRecomendacao);
+
+                //Log.d("====> gerenciamento",idaRecomendacao+id+idUser+opcaoRecomendacao);
+
+                AcessoWeb acessoWeb = new AcessoWeb();
+                String retornoServidor = acessoWeb.sendPostRequest(Config.URL_GERENCIAR_RECOMENDACAO,hashMap);
+                return retornoServidor;
+            }
+        }
+        editaRecomendacao updateRecomend = new editaRecomendacao();
+        updateRecomend.execute();
+    }
+
+    private void buscaRecomendacao() {
+
+        class adicionarComentario extends AsyncTask<Void, Void, String> {
+            ProgressDialog loading;
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                loading = ProgressDialog.show(PerfilAutonomo.this, "Buscando Dados...", "Aguarde...", false, false);
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                loading.dismiss();
+                JSON_STRING_CONTROLE = s;
+                //Log.d("===> Retorno bruxo",JSON_STRING_CONTROLE);
+                mostraEstrela();
+            }
+
+            @Override
+            protected String doInBackground(Void... params) {
+                SharedPreferences sharedpreferences = getSharedPreferences(Login.MyPREFERENCES, Context.MODE_PRIVATE);
+                final String idUser = sharedpreferences.getString("idKey", null);
+
+                HashMap<String, String> hashMap = new HashMap<>();
+                hashMap.put(Config.KEY_USUARIO_IDLOGADO, idUser);
+                hashMap.put(Config.KEY_SERVICO_IDSERVICO, id);
+
+                AcessoWeb acesso = new AcessoWeb();
+                String retorn = acesso.sendPostRequest(Config.URL_BUSCA_RECOMENDACAO, hashMap);
+                return retorn;
+            }
+        }
+
+        adicionarComentario ue = new adicionarComentario();
+        ue.execute();
+    }
+
+    public void mostraEstrela(){
+
+        if(JSON_STRING_CONTROLE.equals("1")) {
+            img.setImageResource(R.drawable.favoritomarcado);
+        }else if(JSON_STRING_CONTROLE.equals("0")){
+            img.setImageResource(R.drawable.favorito);
+        }else{
+            img.setImageResource(R.drawable.favorito);
+        }
     }
 
     public void abrirChat(View v){

@@ -116,9 +116,9 @@ public class InicioUsuario extends AppCompatActivity implements ListView.OnItemC
         Spanned result;
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            result = Html.fromHtml("<b>Bem vindo ao SAM!</b><p>Aqui irá o texto explicando o ToolBar abaixo!</p>",Html.FROM_HTML_MODE_LEGACY);
+            result = Html.fromHtml("<b>Bem vindo ao SAM!</b><p>Explicação do Menu abaixo!</p><p> * Gerenciar seu Perfil - Esta seção permite a você gerenciar(Editar/Excluir) seu cadastro!</p><p> * Buscar um Serviço - Neste icone você pode buscar um serviço cadastrado no aplicativo!</p><p> * Adicionar um Serviço - Se você for um autonomo e quiser oferecer um serviço, é através desta seção, que isso poderá ser feito!</p><p> * Listar seus Serviços - Nesta aba será listada todos os serviços disponibilizados por você, onde será possivel gerenciar(editar/excluir) estes serviços!</p><p> * Abrir Chat - Nesta seção será listadas todas as conversas entre você e os outros usuários!</p>",Html.FROM_HTML_MODE_LEGACY);
         } else {
-            result = Html.fromHtml("<b>Bem vindo ao SAM!</b><p>Aqui irá o texto explicando o ToolBar abaixo!</p>");
+            result = Html.fromHtml("<b>Bem vindo ao SAM!</b><p>Explicação do Menu abaixo!</p><p> * Gerenciar seu Perfil - Esta seção permite a você gerenciar(Editar/Excluir) seu cadastro!</p><p> * Buscar um Serviço - Neste icone você pode buscar um serviço cadastrado no aplicativo!</p><p> * Adicionar um Serviço - Se você for um autonomo e quiser oferecer um serviço, é através desta seção, que isso poderá ser feito!</p><p> * Listar seus Serviços - Nesta aba será listada todos os serviços disponibilizados por você, onde será possivel gerenciar(editar/excluir) estes serviços!</p><p> * Abrir Chat - Nesta seção será listadas todas as conversas entre você e os outros usuários!</p>");
         }
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setTitle("Ajuda");

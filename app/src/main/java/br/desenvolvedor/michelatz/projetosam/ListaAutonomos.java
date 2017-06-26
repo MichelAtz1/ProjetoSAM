@@ -167,7 +167,7 @@ public class ListaAutonomos extends AppCompatActivity implements ListView.OnItem
 
                 AcessoWeb rh = new AcessoWeb();
                 String s = rh.sendPostRequest(Config.URL_LISTA_AUTONOMOS, params2);
-                Log.d("=====> Retornoooo: ",s);
+                //Log.d("=====> Retornoooo: ",s);
                 return s;
             }
         }

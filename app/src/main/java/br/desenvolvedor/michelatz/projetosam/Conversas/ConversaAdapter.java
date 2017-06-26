@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import br.desenvolvedor.michelatz.projetosam.ConexaoWEB.Config;
 import br.desenvolvedor.michelatz.projetosam.Mensagens.ChatConversa;
 import br.desenvolvedor.michelatz.projetosam.R;
 
@@ -37,15 +39,16 @@ public class ConversaAdapter extends RecyclerView.Adapter<ConversaAdapter.Holder
 
     @Override
     public void onBindViewHolder(HolderConversas holder, final int position) {
-        holder.nome.setText(atributosList.get(position).getNome());
-        holder.mensagem.setText(atributosList.get(position).getUltimaMensagem());
+        holder.nomeReceptorServico.setText(atributosList.get(position).getNomeServicoReceptor());
+        //holder.mensagem.setText(atributosList.get(position).getUltimaMensagem());
         holder.hora.setText(atributosList.get(position).getHora());
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(context, ChatConversa.class);
-                i.putExtra("key_receptor",atributosList.get(position).getId());
+                i.putExtra(Config.SERVICO_ID,atributosList.get(position).getIdServico());
+                i.putExtra(Config.ID_AUTONOMO,atributosList.get(position).getIdReceptor());
                 context.startActivity(i);
             }
         });
@@ -60,15 +63,15 @@ public class ConversaAdapter extends RecyclerView.Adapter<ConversaAdapter.Holder
     static class HolderConversas extends RecyclerView.ViewHolder{
 
         CardView cardView;
-        TextView nome;
+        TextView nomeReceptorServico;
         TextView mensagem;
         TextView hora;
 
         public HolderConversas(View itemView) {
             super(itemView);
-            cardView = (CardView) itemView.findViewById(R.id.cardViewAmigos);
-            nome = (TextView) itemView.findViewById(R.id.nomeReceptor);
-            mensagem = (TextView) itemView.findViewById(R.id.ultimaMensagem);
+            cardView = (CardView) itemView.findViewById(R.id.cardViewConversas);
+            nomeReceptorServico = (TextView) itemView.findViewById(R.id.nomeReceptor);
+            //mensagem = (TextView) itemView.findViewById(R.id.ultimaMensagem);
             hora = (TextView) itemView.findViewById(R.id.horaConversa);
         }
     }

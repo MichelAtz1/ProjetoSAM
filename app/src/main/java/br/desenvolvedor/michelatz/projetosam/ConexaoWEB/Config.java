@@ -22,6 +22,8 @@ public class Config {
     public static final String URL_DELETAR_MENSAGEM = "http://projetosw.esy.es/conexao/excluirMensagem.php?id=";
     public static final String URL_BUSCA_RECOMENDACAO = "http://projetosw.esy.es/conexao/buscaRecomendacao.php";
     public static final String URL_LISTAR_CHAT = "http://projetosw.esy.es/conexao/buscaMensagensChat.php";
+    public static final String URL_LISTAR_CONVERSAS = "http://projetosw.esy.es/conexao/chatListarConversas.php";
+    public static final String URL_GERENCIAR_RECOMENDACAO = "http://projetosw.esy.es/conexao/gerenciarRecomendacoes.php";
 
 
     //CHAT
@@ -37,6 +39,8 @@ public class Config {
     public static final String KEY_USUARIO_ESTADO  = "estado";
     public static final String KEY_USUARIO_IDLOGADO  = "idLogado";
 
+    public static final String KEY_SERVICO_RECOMENDACAO  = "recomendacao";
+    public static final String KEY_SERVICO_TIPO_RECENDACAO  = "tipoRecomendacao";
     public static final String KEY_SERVICO_NOME  = "nomeServico";
     public static final String KEY_SERVICO_TURNO  = "turno";
     public static final String KEY_SERVICO_DIA  = "diaSemana";
@@ -58,6 +62,16 @@ public class Config {
     public static final String KEY_CHAT_ID_RECEPTOR = "idReceptor";
     public static final String KEY_CHAT_ID_EMISSOR = "idEmissor";
     public static final String KEY_CHAT_ID_SERVICO = "idServico";
+
+    public static final String KEY_CONVERSA_ID = "id";
+    public static final String KEY_CONVERSA_NOME_SERVICO = "nomeServico";
+    public static final String KEY_CONVERSA_MENSAGEM = "mensagem";
+    public static final String KEY_CONVERSA_EMISSOR = "nomeEmissor";
+    public static final String KEY_CONVERSA_RECEPTOR = "nomeReceptor";
+    public static final String KEY_CONVERSA_ID_EMISSOR = "idEmissor";
+    public static final String KEY_CONVERSA_ID_RECEPTOR = "idReceptor";
+    public static final String KEY_CONVERSA_ID_SERVICO = "idServico";
+    public static final String KEY_CONVERSA_HORARIO = "horario";
 
     //Tags JSON
     public static final String TAG_JSON_ARRAY="result";

@@ -65,6 +65,8 @@ public class ChatConversa extends AppCompatActivity {
         id = intent.getStringExtra(Config.SERVICO_ID);
         idReceptor = intent.getStringExtra(Config.ID_AUTONOMO);
 
+        //Log.d("------> to no chat",id+" - "+idReceptor);
+
         mensagensText = new ArrayList<>();
         edtMensagemDigitada = (EditText) findViewById(R.id.edtMensagem);
         btEnviarMensagem = (Button) findViewById(R.id.btSalvaMensagem);
@@ -126,7 +128,6 @@ public class ChatConversa extends AppCompatActivity {
 
                 MandarMensagem();
                 edtMensagemDigitada.setText(" ");
-                //criarMensagem(MENSAGEM,"00:00",1);
             }
         });
 
@@ -165,8 +166,6 @@ public class ChatConversa extends AppCompatActivity {
             }
         });
         mToobarBotton.inflateMenu(R.menu.menu_botton_usuario);
-
-
         setScrollbarChat();
     }
 
@@ -250,7 +249,7 @@ public class ChatConversa extends AppCompatActivity {
             @Override
             protected void onPostExecute(String retornoServidor) {
                 super.onPostExecute(retornoServidor);
-                Log.d("------>",retornoServidor);
+                //Log.d("------>",retornoServidor);
                 setScrollbarChat();
                 buscaMensagensChat();
             }
@@ -266,7 +265,7 @@ public class ChatConversa extends AppCompatActivity {
                 hashMap.put(Config.KEY_RECEPTOR, idReceptor);
                 hashMap.put(Config.KEY_MENSAGEM_CHAT, MENSAGEM);
                 hashMap.put(Config.KEY_ID_SERVICO, id);
-
+                //Log.d("------> to no chat",id+" - "+idReceptor);
                 AcessoWeb acessoWeb = new AcessoWeb();
                 String retornoServidor = acessoWeb.sendPostRequest(Config.URL_INSERIR_MENSAGEM_CHAT,hashMap);
                 return retornoServidor;
@@ -334,10 +333,8 @@ public class ChatConversa extends AppCompatActivity {
 
                 JSONObject jo = result.getJSONObject(i);
                 String idMensagem = jo.getString(Config.KEY_ID_MENSAGEM);
-                //int teste = Integer.parseInt(idMensagem.toString());
                 String mensagem = jo.getString(Config.KEY_MENSAGEM_CHAT);
                 String idEmissor = jo.getString(Config.KEY_CHAT_ID_EMISSOR);
-                //String idReceptor = jo.getString(Config.TAG_ID_USUARIO);
                 String horarioConv = jo.getString(Config.KEY_HORARIO);
                 if(idUsuario.equals(idEmissor)){
                     tipoMensagem = 1;

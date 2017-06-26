@@ -6,21 +6,23 @@ package br.desenvolvedor.michelatz.projetosam.Conversas;
 
 public class ConversaAtributos {
 
-    private String nome;
+    private String nomeServicoReceptor;
     private String ultimaMensagem;
     private String hora;
-    private String id;
+    private String idServico;
+    private String idReceptor;
+    private String idMensagem;
 
     public ConversaAtributos() {
 
     }
 
-    public String getNome() {
-        return nome;
+    public String getNomeServicoReceptor() {
+        return nomeServicoReceptor;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNomeServicoReceptor(String nomeServicoReceptor) {
+        this.nomeServicoReceptor = nomeServicoReceptor;
     }
 
     public String getUltimaMensagem() {
@@ -39,11 +41,27 @@ public class ConversaAtributos {
         this.hora = hora;
     }
 
-    public String getId() {
-        return id;
+    public String getIdServico() {
+        return idServico;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setIdServico(String idServico) {
+        this.idServico = idServico;
+    }
+
+    public String getIdReceptor() {
+        return idReceptor;
+    }
+
+    public void setIdReceptor(String idReceptor) {
+        this.idReceptor = idReceptor;
+    }
+
+    public String getIdMensagem() {
+        return idMensagem;
+    }
+
+    public void setIdMensagem(String idMensagem) {
+        this.idMensagem = idMensagem;
     }
 }

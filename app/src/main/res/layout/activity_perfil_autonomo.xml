@@ -217,7 +217,6 @@
                         <ListView
                             android:layout_width="match_parent"
                             android:layout_height="800dp"
-                            android:layout_marginLeft="20dp"
                             android:layout_span="2"
                             android:id="@+id/listViewMensagens" />
 
