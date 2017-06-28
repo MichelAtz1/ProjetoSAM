@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.Spanned;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +27,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import br.desenvolvedor.michelatz.projetosam.ConexaoWEB.AcessoWeb;
 import br.desenvolvedor.michelatz.projetosam.ConexaoWEB.Config;
@@ -39,42 +42,15 @@ public class InicioUsuario extends AppCompatActivity implements ListView.OnItemC
     private ListView listServicosOferecidos;
     private ListView listServicosUtilizados;
     private String JSON_STRING;
+    private Timer timer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         setContentView(R.layout.activity_inicio_simples);
 
-        //SharedPreferences sharedpreferences = getSharedPreferences(Login.MyPREFERENCES, Context.MODE_PRIVATE);
-        //String tipoUsuario = sharedpreferences.getString("clienteKey", null);
-        //String tipoAutonomo = sharedpreferences.getString("autonomoKey", null);
-/*
-        if((tipoUsuario.trim().equals("0")) && (tipoAutonomo.trim().equals("0"))) {
-            setContentView(R.layout.activity_inicio_simples);
-
-        }else if((tipoUsuario.trim().equals("1")) && (tipoAutonomo.trim().equals("0"))){
-            setContentView(R.layout.activity_inicio_usuario);
-            listServicosUtilizados = (ListView) findViewById(R.id.listaServicosUtilizados);
-            listServicosUtilizados.setOnItemClickListener(this);
-            getJSONServicoUtilizado();
-
-        }else if((tipoUsuario.trim().equals("0")) && (tipoAutonomo.trim().equals("1"))){
-            setContentView(R.layout.activity_lista_servico);
-            listServicosOferecidos = (ListView) findViewById(R.id.listaServicosOferecidos);
-            listServicosOferecidos.setOnItemClickListener(this);
-            getJSONServicoOferecido();
-
-        }else if((tipoUsuario.trim().equals("1")) && (tipoAutonomo.trim().equals("1"))){
-            setContentView(R.layout.activity_inicio_usuarioautonomo);
-            listServicosOferecidos = (ListView) findViewById(R.id.listaServicosOferecidos);
-            listServicosUtilizados = (ListView) findViewById(R.id.listaServicosUtilizados);
-            listServicosUtilizados.setOnItemClickListener(this);
-            listServicosOferecidos.setOnItemClickListener(this);
-            getJSONServicoOferecido();
-            getJSONServicoUtilizado();
-        }
-*/
         mToobar = (Toolbar) findViewById(R.id.tb_main);
         mToobar.setTitle("  SAM");
         mToobar.setLogo(R.drawable.iconsam);
@@ -110,6 +86,10 @@ public class InicioUsuario extends AppCompatActivity implements ListView.OnItemC
             }
         });
         mToobarBotton.inflateMenu(R.menu.menu_botton_usuario);
+    }
+
+    private void timerSegundos(){
+       // Log.d("=====> Timer","3 segundos");
     }
 
     public void botaoAjuda(View v) {

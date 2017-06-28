@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -234,7 +235,7 @@ public class BuscarServico extends AppCompatActivity {
 
             if (selectedIdRecomendacao == btNao.getId()) {
                 recomendacao = "0";
-            } else if (selectedIdDia == btSim.getId()) {
+            } else if (selectedIdRecomendacao == btSim.getId()) {
                 recomendacao = "1";
             }
 
@@ -243,6 +244,12 @@ public class BuscarServico extends AppCompatActivity {
             intent.putExtra(Config.DIA,dia);
             intent.putExtra(Config.TURNO,turno);
             intent.putExtra(Config.RECOMENDACAO,recomendacao);
+            /*
+            Log.d("=====> Dia: ",dia);
+            Log.d("=====> Turno: ",turno);
+            Log.d("=====> Recomendação: ",recomendacao);
+            Log.d("=====> Serviço: ",ServicoSelecionado);
+            */
             startActivity(intent);
             finish();
         }

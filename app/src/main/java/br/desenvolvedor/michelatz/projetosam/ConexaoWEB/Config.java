@@ -40,6 +40,7 @@ public class Config {
     public static final String KEY_USUARIO_IDLOGADO  = "idLogado";
 
     public static final String KEY_SERVICO_RECOMENDACAO  = "recomendacao";
+    public static final String KEY_SERVICO_GERENCIA_RECOMENDACAO  = "gerenciaRecomendacao";
     public static final String KEY_SERVICO_TIPO_RECENDACAO  = "tipoRecomendacao";
     public static final String KEY_SERVICO_NOME  = "nomeServico";
     public static final String KEY_SERVICO_TURNO  = "turno";
@@ -50,6 +51,7 @@ public class Config {
     public static final String KEY_RECOMENDACAO  = "recomendacao";
     public static final String KEY_SERVICO_MENSAGEM  = "comentario";
     public static final String KEY_ID_AUTONOMO  = "idAutonomo";
+
 
     //CHAT
     public static final String KEY_EMISSOR  = "idEmissor";

@@ -8,7 +8,7 @@
         android:title="Gerenciar seu Perfil"
         android:id="@+id/acao_usuario"
         android:orderInCategory="100"
-        android:icon="@drawable/ic_account_circle"
+        android:icon="@drawable/ic_action_user"
         app:showAsAction="always"/>
 
     <item

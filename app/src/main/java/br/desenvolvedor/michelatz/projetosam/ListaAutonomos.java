@@ -83,11 +83,12 @@ public class ListaAutonomos extends AppCompatActivity implements ListView.OnItem
         recomendacao = intent.getStringExtra(Config.RECOMENDACAO);
         nomeServicoSelecionado = intent.getStringExtra(Config.NOMESERVICO);
 
+/*
         Log.d("=====> Dia: ",dia);
         Log.d("=====> Turno: ",turno);
         Log.d("=====> Recomendação: ",recomendacao);
         Log.d("=====> Serviço: ",nomeServicoSelecionado);
-
+*/
         listAutonomos = (ListView) findViewById(R.id.listaServicosOferecidos);
         listAutonomos.setOnItemClickListener(this);
         buscarListaServico(nomeServicoSelecionado, turno, dia, recomendacao);
@@ -167,7 +168,7 @@ public class ListaAutonomos extends AppCompatActivity implements ListView.OnItem
 
                 AcessoWeb rh = new AcessoWeb();
                 String s = rh.sendPostRequest(Config.URL_LISTA_AUTONOMOS, params2);
-                //Log.d("=====> Retornoooo: ",s);
+                //Log.d("==> qual sql voltou: ",s);
                 return s;
             }
         }

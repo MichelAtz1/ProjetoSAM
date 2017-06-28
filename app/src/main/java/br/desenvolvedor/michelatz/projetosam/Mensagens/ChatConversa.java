@@ -25,6 +25,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import br.desenvolvedor.michelatz.projetosam.BuscarServico;
 import br.desenvolvedor.michelatz.projetosam.CadastrarServico;
@@ -56,6 +58,8 @@ public class ChatConversa extends AppCompatActivity {
     private List<MensagemDeTexto> mensagensText;
     private MensagemAdapter adapter;
 
+    private Timer timer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,25 +79,7 @@ public class ChatConversa extends AppCompatActivity {
         LinearLayoutManager lm = new LinearLayoutManager(this);
         lm.setStackFromEnd(true);
         rv.setLayoutManager(lm);
-/*
-        for(int i=0; i<10; i++){
-            MensagemDeTexto mensagemDeTextoAuxiliar = new MensagemDeTexto();
-            mensagemDeTextoAuxiliar.setId(""+i);
-            mensagemDeTextoAuxiliar.setMensagem("Emissor: "+i);
-            mensagemDeTextoAuxiliar.setTipoMmensagem(1);
-            mensagemDeTextoAuxiliar.setHoraDaMensagem("15:3"+i);
-            mensagensText.add(mensagemDeTextoAuxiliar);
-        }
 
-        for(int i=0; i<10; i++){
-            MensagemDeTexto mensagemDeTextoAuxiliar = new MensagemDeTexto();
-            mensagemDeTextoAuxiliar.setId(""+i);
-            mensagemDeTextoAuxiliar.setMensagem("Receptor: "+i);
-            mensagemDeTextoAuxiliar.setTipoMmensagem(2);
-            mensagemDeTextoAuxiliar.setHoraDaMensagem("15:3"+i);
-            mensagensText.add(mensagemDeTextoAuxiliar);
-        }
-*/
         buscaMensagensChat();
 
         adapter = new MensagemAdapter(mensagensText, this);
@@ -167,6 +153,7 @@ public class ChatConversa extends AppCompatActivity {
         });
         mToobarBotton.inflateMenu(R.menu.menu_botton_usuario);
         setScrollbarChat();
+        temporizador();
     }
 
     @Override
@@ -316,13 +303,32 @@ public class ChatConversa extends AppCompatActivity {
         buscaMensChat.execute();
     }
 
+    private void temporizador(){
+        long TEMPO = (1000 * 3); // chama o método a cada 3 segundos
+        if (timer == null) {
+            Log.d("====> temporizador", "3 segundos");
+            timer = new Timer();
+            TimerTask tarefa = new TimerTask() {
+                public void run() {
+                    try {
+                        buscaMensagensChat();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            };
+            timer.scheduleAtFixedRate(tarefa, TEMPO, TEMPO);
+        }
+    }
+
     private void mostraChat(){
 
         SharedPreferences sharedpreferences = getSharedPreferences(Login.MyPREFERENCES, Context.MODE_PRIVATE);
         String idUsuario = sharedpreferences.getString("idKey", null);
         int tipoMensagem;
 
-        Log.d("------>Json",JSON_STRING);
+        //Log.d("------>Json",JSON_STRING);
+        mensagensText = new ArrayList<>();
 
         JSONObject jsonObject = null;
         try {

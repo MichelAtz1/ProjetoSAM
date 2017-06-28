@@ -42,6 +42,7 @@ public class PerfilAutonomo extends AppCompatActivity {
 
     private String idaRecomendacao;
     private String opcaoRecomendacao;
+    private int totalRecomendacoes = 0;
 
     private TextView edtNome;
     private TextView edtTurnoDisponivel;
@@ -58,6 +59,7 @@ public class PerfilAutonomo extends AppCompatActivity {
     public static String idUsuarioGlobal = "Isso é uma global";
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +71,7 @@ public class PerfilAutonomo extends AppCompatActivity {
         nomeServico = intent.getStringExtra(Config.NOMESERVICO);
         nomeAutonomo = intent.getStringExtra(Config.NOME_USUARIO);
         recomendacao = intent.getStringExtra(Config.RECOMENDACAO);
+        totalRecomendacoes =  Integer.parseInt(recomendacao);
         dia = intent.getStringExtra(Config.DIA);
         turno = intent.getStringExtra(Config.TURNO);
 
@@ -201,7 +204,11 @@ public class PerfilAutonomo extends AppCompatActivity {
     }
 
     public void addComentario(View v){
-        adicionarComentario();
+        if(JSON_STRING_CONTROLE.equals("1")) {
+            adicionarComentario();
+        }else{
+            verificaRecomendacao();
+        }
     }
 
     private void adicionarComentario(){
@@ -361,6 +368,21 @@ public class PerfilAutonomo extends AppCompatActivity {
         alertDialog.show();
     }
 
+    private void verificaRecomendacao(){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage("Para poder comentar no perfil do autonômo, você precisa recomenda-lo!");
+
+        alertDialogBuilder.setPositiveButton("Ok",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                    }
+                });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
     private void deletarMensagem(final String idMens){
         class DeletarMensagem extends AsyncTask<Void,Void,String> {
             ProgressDialog loading;
@@ -407,16 +429,28 @@ public class PerfilAutonomo extends AppCompatActivity {
             idaRecomendacao = "0";
             opcaoRecomendacao ="1";
             JSON_STRING_CONTROLE = "0";
+            totalRecomendacoes = totalRecomendacoes-1;
+            recomendacao = String.valueOf(totalRecomendacoes);
+            edtServico.setText("  Recomendações: "+recomendacao+"       Serviço: "+nomeServico);
+
             editaRecomendacao();
         }else if(JSON_STRING_CONTROLE.equals("0")){
             idaRecomendacao = "1";
             opcaoRecomendacao ="1";// 0 para insert e 1 para update
             JSON_STRING_CONTROLE = "1";
+            totalRecomendacoes = totalRecomendacoes+1;
+            recomendacao = String.valueOf(totalRecomendacoes);
+            edtServico.setText("  Recomendações: "+recomendacao+"       Serviço: "+nomeServico);
+
             editaRecomendacao();
         }else{
             idaRecomendacao = "1";
             opcaoRecomendacao ="0";
             JSON_STRING_CONTROLE = "1";
+            totalRecomendacoes = totalRecomendacoes+1;
+            recomendacao = String.valueOf(totalRecomendacoes);
+            edtServico.setText("  Recomendações: "+recomendacao+"       Serviço: "+nomeServico);
+
             editaRecomendacao();
         }
     }
@@ -432,7 +466,7 @@ public class PerfilAutonomo extends AppCompatActivity {
             @Override
             protected void onPostExecute(String retornoServidor) {
                 super.onPostExecute(retornoServidor);
-                Log.d("> gerenciamento",retornoServidor);
+                //Log.d("> gerenciamento",retornoServidor);
                 mostraEstrela();
             }
 
@@ -443,6 +477,7 @@ public class PerfilAutonomo extends AppCompatActivity {
 
                 HashMap<String,String> hashMap = new HashMap<>();
                 hashMap.put(Config.KEY_SERVICO_RECOMENDACAO, idaRecomendacao);
+                hashMap.put(Config.KEY_SERVICO_GERENCIA_RECOMENDACAO, recomendacao);
                 hashMap.put(Config.KEY_SERVICO_IDSERVICO,id);
                 hashMap.put(Config.KEY_SERVICO_IDUSUARIO,idUser);
                 hashMap.put(Config.KEY_SERVICO_TIPO_RECENDACAO,opcaoRecomendacao);
