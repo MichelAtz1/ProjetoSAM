@@ -17,7 +17,7 @@ import javax.net.ssl.HttpsURLConnection;
 public class AcessoWeb {
 
     // Método para enviar httpPostRequest
-    // Este método está usando dois argumentosviado a denuncia
+    // Este método está usando dois argumentos enviados
     // Primeiro argumento é o URL do script
     // O outro é um HashMap com pares de valor de nome contendo os dados a serem enviados com o pedido
     public String sendPostRequest(String requestURL,

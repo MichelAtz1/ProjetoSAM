@@ -278,6 +278,7 @@ public class ChatConversa extends AppCompatActivity {
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
+                setScrollbarChat();
                 mostraChat();
             }
 
@@ -304,9 +305,9 @@ public class ChatConversa extends AppCompatActivity {
     }
 
     private void temporizador(){
-        long TEMPO = (1000 * 3); // chama o método a cada 3 segundos
+        long TEMPO = (1000 * 2); // chama o método a cada 2 segundos
         if (timer == null) {
-            Log.d("====> temporizador", "3 segundos");
+            Log.d("====> temporizador", "2 segundos");
             timer = new Timer();
             TimerTask tarefa = new TimerTask() {
                 public void run() {
@@ -359,6 +360,7 @@ public class ChatConversa extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        setScrollbarChat();
         adapter = new MensagemAdapter(mensagensText, this);
         rv.setAdapter(adapter);
     }

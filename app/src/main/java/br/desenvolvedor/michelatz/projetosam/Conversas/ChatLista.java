@@ -194,7 +194,6 @@ public class ChatLista extends AppCompatActivity {
             jsonObject = new JSONObject(JSON_STRING);
             JSONArray result = jsonObject.getJSONArray(Config.TAG_JSON_ARRAY);
 
-
             for(int i = 0; i<result.length(); i++){
 
                 JSONObject jo = result.getJSONObject(i);

@@ -164,6 +164,14 @@ public class GerenciarUsuario extends AppCompatActivity {
                 loading.dismiss();
 
                     Toast.makeText(GerenciarUsuario.this, retornoServidor, Toast.LENGTH_LONG).show();
+                    SharedPreferences sharedpreferences = getSharedPreferences(Login.MyPREFERENCES, Context.MODE_PRIVATE);
+
+                    SharedPreferences.Editor editor = sharedpreferences.edit();
+
+                        editor.putString("nomeKey", nome);
+
+                        editor.commit();
+
                     Intent intent = new Intent(GerenciarUsuario.this, InicioUsuario.class);
                     startActivity(intent);
                     finish();
